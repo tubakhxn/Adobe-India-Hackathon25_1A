@@ -1,0 +1,4 @@
+    adobe-pdfservices-sdk
+    flask
+    openai
+    python-dotenv
