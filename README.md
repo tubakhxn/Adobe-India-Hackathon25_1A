@@ -106,7 +106,6 @@ These instructions are for running the project directly on your machine using a 
 
 **Prerequisites:**
 * Python 3.8+
-* Adobe PDF Services API credentials. You can get free credentials [here](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/credentials/).
 
 **Installation & Setup:**
 1.  **Clone the repository** and navigate into the `app` directory:
