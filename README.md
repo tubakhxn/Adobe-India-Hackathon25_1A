@@ -126,27 +126,16 @@ These instructions are for running the project directly on your machine using a 
     ```bash
     source venv/bin/activate
     ```
-3.  **Create a `requirements.txt` file** with the following content:
-    ```
-    adobe-pdfservices-sdk
-    flask
-    openai
-    python-dotenv
-    ```
-4.  **Install the dependencies:**
+3.  **Install the dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
-5.  **Set up your credentials.** Create a file named `.env` in the `ps-1a/app` directory and add your Adobe PDF Services credentials:
-    ```
-    PDF_SERVICES_CLIENT_ID=<YOUR_CLIENT_ID>
-    PDF_SERVICES_CLIENT_SECRET=<YOUR_CLIENT_SECRET>
-    ```
-6.  **Run the extraction script**:
+
+4.  **Run the extraction script**:
     ```bash
     python main.py
     ```
-7.  **Start the web application** (optional, for an interactive demo):
+5.  **Start the web application** (optional, for an interactive demo):
     ```bash
     python webapp.py
     ```
