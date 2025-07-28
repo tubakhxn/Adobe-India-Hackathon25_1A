@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <title>PDF Outline/Table Extractor</title>
+</head>
+<body>
+  <h2>Upload PDF to Extract Outline & Tables (Offline)</h2>
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="pdf" required>
+    <input type="submit" value="Upload">
+  </form>
+  {% if outline %}
+    <h3>Extracted Outline (JSON)</h3>
+    <pre>{{ outline }}</pre>
+    {% if file_url %}
+      <a href="{{ file_url }}">Download JSON</a>
+    {% endif %}
+  {% endif %}
+</body>
+</html>
