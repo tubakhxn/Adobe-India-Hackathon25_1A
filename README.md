@@ -66,6 +66,29 @@ ps-1a/
 
 ```
 ---
+## 💡 Approach and Core Concepts
+
+### Our Approach: From Unstructured PDF to Actionable Data
+The fundamental challenge with PDFs is that they are designed for human visual consumption, not for machine understanding. Our approach was to build a robust, backend-only pipeline that systematically transforms a visually structured PDF into a machine-readable, hierarchical format.
+
+The project is designed as a **Core Extraction Engine**: a powerful process responsible for the heavy lifting. Its sole job is to ingest a PDF and output a clean, structured JSON file representing the document's outline.
+
+The key decision in our approach was to use the **Adobe PDF Services SDK**. Instead of trying to reinvent the wheel by manually parsing PDF text streams or relying on fragile rules like font sizes, we leveraged Adobe's own powerful engine. This provides a deep, reliable understanding of the document's internal structure, which is the foundation of our solution's accuracy.
+
+### Backend Workflow: A Step-by-Step Breakdown
+1.  **Initiation (`main.py`)**: The process begins when the `main.py` script is executed.
+2.  **File Discovery**: The script scans the `/app/input` directory for all `.pdf` files.
+3.  **Extraction Loop**: It iterates through each PDF, calling the core extraction logic in `extractor.py`.
+4.  **Deep PDF Analysis (`extractor.py`)**: The **Adobe PDF Services SDK** performs a deep analysis of the PDF, returning a detailed JSON object representing the document's structure, text, properties, and tags.
+5.  **Parsing and Structuring**: Our logic parses this massive JSON object, intelligently identifying and classifying elements like Title, H1, H2, and H3 based on their semantic tags.
+6.  **Output Generation**: The compiled outline is formatted into the simple, clean JSON structure required by the problem statement.
+7.  **Saving the Result**: The final JSON is saved to the `/app/output` directory, with a filename matching the input PDF.
+
+### The Core Concept: Adobe PDF Services SDK
+This is the cornerstone of the project. We use the SDK's **PDF Extract API**, which understands the PDF's **Document Object Model (DOM)**. This is crucial because it allows our solution to:
+* **Identify Elements Semantically:** We identify a heading because it is tagged as `<H1>` or `<H2>` in the document's structure, which is far more reliable than guessing based on font size or boldness.
+* **Preserve Hierarchy:** The parent-child relationships in the DOM make it easy to understand the document's outline.
+* **Achieve High Accuracy:** By relying on the document's true semantic structure, our engine can accurately extract the required information even from complex PDFs.
 
 ## 🛠️ Getting Started
 
