@@ -42,7 +42,7 @@ Our solution leverages the powerful **Adobe PDF Services SDK** to parse the deep
 * **Web Application**: **Flask** is used to create the simple web interface for the chatbot demonstration.
 * **No External ML Models**: The solution does not rely on large, pre-trained machine learning models, ensuring it remains lightweight and meets the size constraints.
 
-###  deliverables Key Deliverables
+### Key Deliverables
 * A fully operational **Dockerfile** for building a self-contained, runnable solution.
 * An automated process within the container that takes any `filename.pdf` from the `/app/input` directory and generates a corresponding `filename.json` in the `/app/output` directory.
 * The generated JSON files strictly conform to the required output schema.
