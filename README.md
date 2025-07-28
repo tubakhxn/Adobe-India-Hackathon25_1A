@@ -67,51 +67,89 @@ ps-1a/
 ```
 ---
 
-## 🚀 How to Build and Run
+## 🛠️ Getting Started
 
-This project is designed to be run with Docker.
+This guide provides instructions for running the project offline for the official submission and online for development purposes.
 
-**Prerequisites:**
-* [Docker](https://www.docker.com/get-started) installed on your system.
+### Running Offline on Device (Official Method for Submission)
 
-### Building the Docker Image
-1.  **Clone the repository:**
+To comply with the hackathon rules, you **must** use the Docker method for a true offline execution. The container is fully self-contained and runs without any network access.
+
+1.  **Prerequisites**:
+    * [Docker](https://www.docker.com/get-started) installed on your system.
+
+2.  **Clone the repository:**
     ```bash
     git clone <repository-url>
     cd <repository-directory>/ps-1a
     ```
-2.  **Build the image:**
+
+3.  **Place your PDF files** in the `ps-1a/app/input` directory.
+
+4.  **Build the Docker image:**
     ```bash
     docker build --platform linux/amd64 -t pdf-extractor-app .
     ```
 
-### Running the Solution
-
-There are two ways to run the container:
-
-**1. For Hackathon Evaluation (Batch Processing)**
-
-This command runs the extraction script on all PDFs in the `input` folder and saves the JSON output. It is designed for automated testing and adheres to the hackathon's execution requirements.
-
-1.  Place your PDF files in the `ps-1a/app/input` directory.
-2.  Run the container using the following command:
+5.  **Run the container for batch processing (Offline Execution):**
+    This is the required command for evaluation. It processes all PDFs from the `input` folder and saves the JSON output to the `output` folder, all without internet access.
     ```bash
     docker run --rm -v $(pwd)/app/input:/app/input -v $(pwd)/app/output:/app/output --network none pdf-extractor-app
     ```
-    The container will process the files and then exit. The JSON results will be available in the `ps-1a/app/output` directory.
+    After the command finishes, the extracted JSON files will be available in the `ps-1a/app/output` directory.
 
-**2. For Interactive Demo (Web App)**
+### Running via Command Line / CMD (For Development)
 
-This command starts the web server, allowing you to interact with the chatbot.
+These instructions are for running the project directly on your machine using a command-line interface like the Windows Command Prompt (CMD), PowerShell, or a Linux/macOS terminal.
 
-1.  Place your PDF files in the `ps-1a/app/input` directory.
-2.  Run the container:
+**Note:** This method requires an active internet connection because the Adobe PDF Services SDK needs to communicate with Adobe's APIs. It is **not** the method for the final offline submission.
+
+**Prerequisites:**
+* Python 3.8+
+* Adobe PDF Services API credentials. You can get free credentials [here](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/credentials/).
+
+**Installation & Setup:**
+1.  **Clone the repository** and navigate into the `app` directory:
     ```bash
-    docker run -p 5000:5000 pdf-extractor-app
+    git clone <repository-url>
+    cd <repository-directory>/ps-1a/app
     ```
-3.  Open your web browser and navigate to `http://localhost:5000` to use the application.
-
----
+2.  **Create and activate a virtual environment:**
+    ```bash
+    python -m venv venv
+    ```
+    On Windows CMD:
+    ```cmd
+    venv\Scripts\activate
+    ```
+    On Linux/macOS/Git Bash:
+    ```bash
+    source venv/bin/activate
+    ```
+3.  **Create a `requirements.txt` file** with the following content:
+    ```
+    adobe-pdfservices-sdk
+    flask
+    openai
+    python-dotenv
+    ```
+4.  **Install the dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+5.  **Set up your credentials.** Create a file named `.env` in the `ps-1a/app` directory and add your Adobe PDF Services credentials:
+    ```
+    PDF_SERVICES_CLIENT_ID=<YOUR_CLIENT_ID>
+    PDF_SERVICES_CLIENT_SECRET=<YOUR_CLIENT_SECRET>
+    ```
+6.  **Run the extraction script**:
+    ```bash
+    python main.py
+    ```
+7.  **Start the web application** (optional, for an interactive demo):
+    ```bash
+    python webapp.py
+    ```
 
 ## 📄 License
 
